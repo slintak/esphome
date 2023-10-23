@@ -31,7 +31,7 @@ const uint32_t TEMP_SHIFT = 8;
 const uint16_t BITS = 43;
 
 void SinclairIrClimate::transmit_state() {
-  uint64_t remote_state = 0x25150000000ULL;
+  uint64_t remote_state = 0x25000000000ULL;
 
   switch (this->mode) {
     case climate::CLIMATE_MODE_COOL:
@@ -110,7 +110,7 @@ bool SinclairIrClimate::on_receive(remote_base::RemoteReceiveData data) {
 
   ESP_LOGD(TAG, "Received code 0x%012" PRIX64, remote_state);
 
-  if ((remote_state & 0xFFFF0000000ULL) != 0x25150000000ULL) {
+  if ((remote_state & 0xFF000000000ULL) != 0x25000000000ULL) {
     return false;
   }
 
